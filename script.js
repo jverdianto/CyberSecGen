@@ -23,10 +23,23 @@ function addUserMessage(message) {
 function addBotMessage(message) {
     const botMessage = document.createElement("div");
     botMessage.className = "bot-message";
-    botMessage.textContent = message;
     chatLog.appendChild(botMessage);
-    adjustMessageWidth(botMessage); // Menyesuaikan lebar balon pesan
+
+    // Animasi efek ketikan
+    let charIndex = 0;
+    const typingInterval = setInterval(() => {
+        if (charIndex < message.length) {
+            const typingText = document.createElement("span");
+            typingText.textContent = message.charAt(charIndex);
+            botMessage.appendChild(typingText);
+            charIndex++;
+        } else {
+            clearInterval(typingInterval); // Hentikan animasi ketika semua karakter ditampilkan
+            adjustMessageWidth(botMessage);
+        }
+    }, 50); // Interval waktu antara penambahan karakter
 }
+
 
 function adjustMessageWidth(messageElement) {
     const messageText = messageElement.textContent;
