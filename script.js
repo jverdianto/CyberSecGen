@@ -35,13 +35,9 @@ function addBotMessage(message) {
 function adjustMessageWidth(messageElement) {
     const messageText = messageElement.textContent;
     const messageLength = messageText.length;
-    const maxWidth = Math.min(messageLength * messageLength + 32, 1000) + "px";
+    const width = Math.min(messageLength, 70) + "%";
 
-    if (maxWidth == 1000 + "px") {
-        maxWidth = 70 + "%"
-    }
-
-    messageElement.style.width = maxWidth;
+    messageElement.style.width = width;
 }
 
 function disableUserInput() {
@@ -70,7 +66,7 @@ function sendUserMessage(userMessage) {
         redirect: 'follow'
     };
 
-    fetch("http://192.168.193.109:5000/api", requestOptions)
+    fetch("http://192.168.193.109:5000/api/data", requestOptions)
     .then(response => response.json())
     .then(result => {
         console.log(result.message);
@@ -99,7 +95,9 @@ sendButton.addEventListener("click", function(){
 // Dapat juga menangani input dari keyboard
 userInput.addEventListener("keyup", function(event) {
     if (event.key === "Enter") {
-        sendButton.click();
+        if (!event.shiftKey) {
+            sendButton.click();
+        }
     }
 });
 
