@@ -45,11 +45,12 @@ body {
 /* Chat Log */
 .chat-log {
     flex: 1; /* Agar konten chat-log dapat mengisi tinggi penuh */
-    overflow-y: scroll;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
     background-color: #f7f7f7;
+    max-height: 100%; /* Tinggi maksimum chat log, sesuaikan sesuai kebutuhan */
+    overflow-y: auto; /* Aktifkan scroll jika konten melebihi tinggi maksimum */
 }
 
 .user-message, .bot-message {
@@ -80,12 +81,6 @@ body {
     margin-right: auto; /* Untuk meletakkan pesan chatbot di sebelah kiri */
     margin-left: 10px; /* Spasi antara pesan dengan tepi chat log */
     word-wrap: break-word; /* Memungkinkan teks panjang untuk mematahkan ke baris berikutnya */
-}
-
-/* Tambahkan gaya CSS untuk chat log */
-.chat-log {
-    max-height: 100%; /* Tinggi maksimum chat log, sesuaikan sesuai kebutuhan */
-    overflow-y: auto; /* Aktifkan scroll jika konten melebihi tinggi maksimum */
 }
 
 /* Chat Input */
