@@ -40,11 +40,10 @@ function addBotMessage(message) {
     }, 50); // Interval waktu antara penambahan karakter
 }
 
-
 function adjustMessageWidth(messageElement) {
     const messageText = messageElement.textContent;
     const messageLength = messageText.length;
-    const maxWidth = Math.min(messageLength * 2, 70); // Maksimum 70% lebar, disesuaikan dengan faktor 5
+    const maxWidth = Math.min(messageLength, 70); // Maksimum 70% lebar, disesuaikan dengan faktor 5
 
     messageElement.style.maxWidth = maxWidth + "%";
 }
@@ -59,16 +58,82 @@ function enableUserInput() {
     sendButton.disabled = false;
 }
 
-sendButton.addEventListener("click", function() {
-    if (!isBotResponding) {
-        return; // Pengguna tidak dapat mengirim pesan sampai bot merespons
-    }
+// sendButton.addEventListener("click", function() {
+//     if (!isBotResponding) {
+//         return; // Pengguna tidak dapat mengirim pesan sampai bot merespons
+//     }
     
+//     const userMessage = userInput.value.trim();
+//     if (userMessage) {
+//         addUserMessage(userMessage);
+
+//         // Persiapkan header dan body permintaan
+//         const apiUrl = "http://192.168.193.109:5000/api"; // Ganti dengan URL API Anda
+//         const headers = {
+//             'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
+//             'Accept-Language': 'en-US,en;q=0.5',
+//             'Accept-Encoding': 'gzip, deflate',
+//             'Connection': 'close',
+//             'Upgrade-Insecure-Requests': '1',
+//             'Content-Type': 'application/json',
+//             'Content-Length': userMessage.length.toString()
+//         };
+//         const requestOptions = {
+//             method: 'POST',
+//             headers: headers,
+//             body: JSON.stringify({ message: userMessage })
+//         };
+
+//         // Kirim permintaan ke API
+//         fetch(apiUrl, requestOptions)
+//             .then(response => response.json())
+//             .then(data => {
+//                 // Tanggapan dari API
+//                 addBotMessage(data.botResponse); // Menambahkan respons chatbot ke log
+//                 isBotResponding = true;
+//                 enableUserInput();
+//             })
+//             .catch(error => {
+//                 console.error('Error:', error);
+//                 isBotResponding = true;
+//                 enableUserInput();
+//             });
+
+//         userInput.value = ""; // Hapus input pengguna
+//     }
+// });
+
+sendButton.addEventListener("click", function(){
+    if (!isBotResponding) {
+        return;
+    }
+
     const userMessage = userInput.value.trim();
     if (userMessage) {
         addUserMessage(userMessage);
-        userInput.value = ""; // Hapus input pengguna
-    }
+        
+        // Kirim pesan pengguna ke API
+        var raw = JSON.stringify({
+            "message": "What is cyber security?"
+        });
+
+        var requestOptions = {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: raw,
+            redirect: 'follow'
+        };
+
+        fetch("http://192.168.193.109:5000/api", requestOptions)
+        .then(response => response.text())
+        .then(result => console.log(result))
+        .catch(error => console.log('error', error));
+
+        userInput.value= "";
+    }    
 });
 
 // Dapat juga menangani input dari keyboard
