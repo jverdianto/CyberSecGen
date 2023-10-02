@@ -2,10 +2,10 @@ from flask import request, jsonify, Blueprint
 import g4f
 
 def generateMessageKeyword(message):
-    prompt = "Please identify the three main terms or keywords, divided by comma, in the following sentence or paragraph: " + message
+    prompt = "Please identify the main terms or keywords, divided by comma if more than one, in the following sentence or paragraph: " + message
     keywordResponse = g4f.ChatCompletion.create(
         model=g4f.models.gpt_35_turbo_16k,
-        messages=[{"role": "user", "content": prompt}],
+        messages=[{"role": "user", "content": prompt}]
         )
     while keywordResponse == "":
         keywordResponse = g4f.ChatCompletion.create(
