@@ -29,7 +29,7 @@ function addBotMessage(message) {
             clearInterval(typingInterval); // Hentikan animasi ketika semua karakter ditampilkan
             adjustMessageWidth(botMessage);
         }
-    }, 20); // Interval waktu antara penambahan karakter
+    }, 10); // Interval waktu antara penambahan karakter
 }
 
 function adjustMessageWidth(messageElement) {
@@ -66,11 +66,20 @@ function sendUserMessage(userMessage) {
         redirect: 'follow'
     };
 
-    fetch("http://localhost:5000/api/data", requestOptions)
+    fetch("http://192.168.18.109:5000/api/data", requestOptions)
     .then(response => response.json())
     .then(result => {
         console.log(result.message);
-        addBotMessage(result.message);
+        console.log(result.keyword);
+        // Memeriksa jika ada karakter baris baru (\n) dalam result.message
+        if (result.message.includes('\n\n')) {
+            const messageLines = result.message.split('\n\n');
+            messageLines.forEach(line => {
+                addBotMessage(line); // Menambahkan setiap baris sebagai pesan baru
+            });
+        } else {
+            addBotMessage(result.message); // Jika tidak ada karakter baris baru
+        }
         isBotResponding = true;
         enableUserInput();
     })
