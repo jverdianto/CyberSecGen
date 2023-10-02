@@ -8,26 +8,25 @@ first_blueprint = Blueprint('first_blueprint', __name__, url_prefix="/api")
 def getMessage():
     if request.json:
         chatRequest = request.get_json()['message']
-        asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
-        chatKeyword = asyncio.run(generateMessageKeyword(chatRequest))
-        chatResponse = asyncio.run(generateMessage(chatRequest))
-        
+        asyncio.set_event_loop(asyncio.new_event_loop())
+        chatResponse = generateMessage(chatRequest)
+        chatKeyword = generateMessageKeyword(chatRequest)
         data = {
         'message': chatResponse,
-        'keyword': chatKeyword
+        'keyword': chatKeyword,
         }
         return jsonify(data)
     else:
         return jsonify({'message': 'No JSON data found in the request'})
 
-async def generateMessage(chatRequest):
-    chatResponse = await g4f.ChatCompletion.create_async(
-        model=g4f.models.gpt_4,
+def generateMessage(chatRequest):
+    chatResponse = g4f.ChatCompletion.create(
+        model=g4f.models.gpt_35_turbo_16k,
         messages=[{"role": "user", "content": chatRequest}],
     )
     while chatResponse == "":
-        chatResponse = await g4f.ChatCompletion.create_async(
-        model=g4f.models.gpt_4,
+        chatResponse = g4f.ChatCompletion.create(
+        model=g4f.models.gpt_35_turbo_16k,
         messages=[{"role": "user", "content": chatRequest}],
     )
     return chatResponse
