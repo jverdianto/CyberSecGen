@@ -17,9 +17,7 @@ def generateMessageKeyword(message):
 def checkKeyword(keywordResponse):
     from run import WORDLISTS
     keywordLists = keywordResponse.split(', ')
-    print (keywordLists)
     for keyword in keywordLists:
-        print (keyword)
         if keyword.lower() in (data.lower() for data in WORDLISTS):
             return True
     return False
