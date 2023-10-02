@@ -35,7 +35,7 @@ function addBotMessage(message) {
 function adjustMessageWidth(messageElement) {
     const messageText = messageElement.textContent;
     const messageLength = messageText.length;
-    const width = Math.min(messageLength, 70) + "%";
+    const width = Math.min((messageLength + 2.5) * 9, 700) + "px";
 
     messageElement.style.width = width;
 }
@@ -66,7 +66,7 @@ function sendUserMessage(userMessage) {
         redirect: 'follow'
     };
 
-    fetch("http://192.168.18.109:5000/api/data", requestOptions)
+    fetch("http://192.168.65.12:5000/api/data", requestOptions)
     .then(response => response.json())
     .then(result => {
         console.log(result.message);
