@@ -26,6 +26,10 @@ Security awareness
 Social engineering
 Patch management
 Zero-day vulnerability
+0 day vulnerability
+0 day vulnerabilities
+zero day vulnerability
+zero day vulnerabilities
 Security audit
 Authentication
 Cybersecurity policy
@@ -105,7 +109,6 @@ Cybersecurity awareness tips
 Cybersecurity career
 Security awareness policy
 Firewall
-Malware
 VPN
 Phishing
 HTTPS
@@ -113,9 +116,13 @@ IoT
 Ransomware
 SSL
 DDoS
+distributed denial of service
+dos
+denial of service
 Antivirus
 Patching
-Encryption
+Encrypt
+encrypted
 Breach
 Password
 Cyberattack
@@ -153,11 +160,16 @@ Polymorphic
 Macro Virus
 Fileless Malware
 Drive-by Download
+drive by download
 Social Engineering
 Remote Access Trojan (RAT)
 Cryptojacking
-Man-in-the-Middle (MitM)
+Man-in-the-Middle
+man in the middle
+MITM
 Zero-Day
+zero day
+0 day
 Malvertising
 Malicious Payload
 Zombie Computer
@@ -176,6 +188,7 @@ Malware Removal
 Payload Delivery
 Dropper File
 Drive-by Exploit
+drive by exploit
 Exploit Kit
 Command and Control (C&C)
 Bot Herder
@@ -184,8 +197,12 @@ Obfuscation
 Trojan Downloader
 Malware Scanner
 Network Worm
-Host-Based Intrusion Detection System (HIDS)
-Network-Based Intrusion Detection System (NIDS)
+Host-Based Intrusion Detection System
+Host Based Intrusion Detection System
+HIDS
+Network-Based Intrusion Detection System
+Network Based Intrusion Detection System
+NIDS
 Malware Signature
 Virus Definition
 Rootkit Detector
@@ -226,6 +243,11 @@ Security Assessment
 Exploitation Testing
 Security Evaluation
 Zero-Day Exploits
+0 day
+zero day
+zero day exploit
+zero day exploits
+zero day exploitation
 Attack Vectors
 Social Engineering
 Phishing Simulation
@@ -335,11 +357,17 @@ Data Execution Prevention
 DEP
 Memory Protection
 Kernel-Level Vulnerabilities
+Kernel
+kernel level Vulnerabilities
+kernel level vulnerability
 Hardware Vulnerabilities
 SQL Injection
 Cross-Site Scripting
+Cross site scripting
+cross-site-scripting
 XSS
 Cross-Site Request Forgery
+cross site request forgery
 CSRF
 Security Misconfiguration
 Insecure Deserialization
@@ -347,6 +375,7 @@ Broken Authentication
 Insecure Direct Object References
 IDOR
 Server-Side Request Forgery
+server side request forgery
 SSRF
 XML External Entity 
 XML External Entity Injection
@@ -361,8 +390,21 @@ Session Hijacking
 Data Validation Issues
 API Security Concerns
 DOM-based Vulnerabilities
+dom based vulnerability
+dom based vulnerabilities
 Content Security Policy
 CSP
 Business Logic Flaws
 Security Orchestration Automation Response
 SOAR
+IP
+IPv4
+IPv6
+IP address
+IPv4 address
+IPv6 address
+internet protocol address
+internet protocol
+network
+network protocol
+intrusion
