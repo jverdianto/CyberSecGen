@@ -162,7 +162,8 @@ Fileless Malware
 Drive-by Download
 drive by download
 Social Engineering
-Remote Access Trojan (RAT)
+Remote Access Trojan
+RAT
 Cryptojacking
 Man-in-the-Middle
 man in the middle
@@ -176,8 +177,10 @@ Zombie Computer
 Infostealer
 Logic Attack
 Data Exfiltration
-Advanced Persistent Threat (APT)
+Advanced Persistent Threat
+APT
 Malware Analysis
+Malware Development
 Sandbox Evasion
 Heuristic Analysis
 Behavioral Analysis
@@ -190,7 +193,7 @@ Dropper File
 Drive-by Exploit
 drive by exploit
 Exploit Kit
-Command and Control (C&C)
+Command and Controls
 Bot Herder
 Payload Encryption
 Obfuscation
@@ -253,7 +256,8 @@ Social Engineering
 Phishing Simulation
 Intrusion Testing
 Threat Hunting
-Advanced Persistent Threat (APT)
+Advanced Persistent Threat
+APT
 Offensive Security
 Reconnaissance
 Attack Surface
@@ -408,3 +412,15 @@ internet protocol
 network
 network protocol
 intrusion
+tcp
+transfer control protocol
+udp
+user diagram protocol
+dhcp
+dynamic host configuration protocol
+cve
+common vulnerability exposure
+common vulnerability exposures
+common vulnerabilities exposure
+common vulnerabilities exposures
+common vulnerabilities and exposures
