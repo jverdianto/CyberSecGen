@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CyberSecGen</title>
-    <link rel="stylesheet" href="style.css"> <!-- Hubungkan dengan berkas CSS -->
+    <link rel="stylesheet" href="{{ url_for('static',filename='styles/style.css') }}"> <!-- Hubungkan dengan berkas CSS -->
 </head>
 <body>
     <div class="chat-container">
@@ -19,6 +19,6 @@
             <button id="send-button">Send</button>
         </div>
     </div>
-    <script src="script.js"></script> <!-- Hubungkan dengan berkas JavaScript -->
+    <script src="{{ url_for('static',filename='script/script.js') }}"></script> <!-- Hubungkan dengan berkas JavaScript -->
 </body>
 </html>

@@ -1,6 +1,5 @@
 from flask import request, jsonify, Blueprint
-from Routes.checkMessage import generateMessageKeyword, checkKeyword
-import asyncio
+from Backend.Routes.checkMessage import generateMessageKeyword, checkKeyword
 import g4f
 
 first_blueprint = Blueprint('first_blueprint', __name__, url_prefix="/api")
@@ -8,9 +7,7 @@ first_blueprint = Blueprint('first_blueprint', __name__, url_prefix="/api")
 def getMessage():
     if request.json:
         chatRequest = request.get_json()['message']
-        asyncio.set_event_loop(asyncio.new_event_loop())
         chatKeyword = generateMessageKeyword(chatRequest)
-        asyncio.set_event_loop(asyncio.new_event_loop())
         isValidKeyword = checkKeyword(chatKeyword)
         if isValidKeyword == True:
             chatResponse = generateMessage(chatRequest)
@@ -20,7 +17,7 @@ def getMessage():
             }
         else:
             data = {
-            'message': "I'm sorry, your question is not related to Cyber Security",
+            'message': "Your question is not related to Cyber Security",
             'keyword': chatKeyword,
             }
         return jsonify(data)

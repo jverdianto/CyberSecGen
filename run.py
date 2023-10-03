@@ -1,26 +1,26 @@
-from flask import Flask
+from flask import Flask, render_template
 from flask_cors import CORS
-from Routes.api import first_blueprint
-from Routes.checkMessage import checkKeyword
+from Backend.Routes.api import first_blueprint
 import os
 import csv
 
 # Create a Flask web application instance
 app = Flask(__name__)
 app.register_blueprint(first_blueprint)
+path = os.getcwd()
 
-CORS(app)
+CORS(app, resources={r"/*": {"origins": "http://localhost"}})
 
 # Define a route and a function to handle requests
 @app.route('/')
-def hello_world():
-    return 'Hello, World!'
+def main_page():
+    return render_template('index.html')
 
 #Function for load wordlist from file the first time
 def loadWordLists():
     WORDLISTS = []
-    absolute_path = os.path.dirname(__file__)
-    relative_path = "wordlist.csv"
+    absolute_path = path
+    relative_path = "Backend/wordlist.csv"
     full_path = os.path.join(absolute_path, relative_path)
     with open(full_path, 'r') as f:
         reader = csv.reader(f)

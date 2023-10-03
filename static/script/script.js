@@ -66,7 +66,7 @@ function sendUserMessage(userMessage) {
         redirect: 'follow'
     };
 
-    fetch("http://192.168.65.12:5000/api/data", requestOptions)
+    fetch("http://localhost:5000/api/data", requestOptions)
     .then(response => response.json())
     .then(result => {
         console.log(result.message);

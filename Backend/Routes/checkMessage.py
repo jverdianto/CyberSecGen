@@ -1,4 +1,3 @@
-from flask import request, jsonify, Blueprint
 import g4f
 
 def generateMessageKeyword(message):
@@ -9,7 +8,7 @@ def generateMessageKeyword(message):
         )
     while keywordResponse == "":
         keywordResponse = g4f.ChatCompletion.create(
-        model=g4f.models.gpt_4,
+        model=g4f.models.gpt_35_turbo_16k,
         messages=[{"role": "user", "content": prompt}],
     )
     return keywordResponse
