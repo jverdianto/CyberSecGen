@@ -31,6 +31,20 @@ body {
     flex-direction: column;
 }
 
+@media only screen and (max-width: 700px) {
+    .chat-container {
+        margin: 0%; /* Tambahkan ruang atas dan bawah (seperti margin) */
+        width: 100%; /* Lebar 100% */
+        height: 100%; /* Tinggi 100% */
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-direction: column;
+    }
+}
+
 /* Header */
 .chat-header {
     background-color: #007bff;
