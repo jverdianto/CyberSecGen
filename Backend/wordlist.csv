@@ -10,11 +10,15 @@ Encryption
 Phishing
 Two-factor authentication
 Two factor authentication
+2FA
 Multi-factor authentication
 Multi factor authentication
+MFA
 Ransomware
 Vulnerability
+Vulnerability analysis
 Penetration testing
+pentest
 Cyber attack
 Cybercrime
 Hacker
@@ -54,6 +58,7 @@ Secure communication
 Cybersecurity best practices
 Threat intelligence
 Security operations
+security operation
 Data protection
 Security analyst
 Network monitoring
@@ -85,6 +90,9 @@ Security patch
 Cybersecurity education
 Security incident management
 Web application security
+web application firewall
+web app firewall
+waf
 Network security monitoring
 Data security policy
 Cybersecurity awareness training
@@ -95,6 +103,7 @@ Computer security
 IT security
 Cybersecurity consulting
 Information security policy
+information disclosure
 Cybersecurity awareness program ideas
 Cybersecurity risk assessment
 Cybersecurity solutions
@@ -124,6 +133,10 @@ Patching
 Encrypt
 encrypted
 Breach
+Breach forum
+breach forums
+breachforum
+breachforums
 Password
 Cyberattack
 Virus
@@ -151,6 +164,8 @@ Keylogger
 Rootkit
 Botnet
 Exploit
+exploits
+exploit tools
 Phishing
 Spam
 Backdoor
@@ -186,6 +201,7 @@ Heuristic Analysis
 Behavioral Analysis
 Infection Vector
 Code Injection
+Command injection
 Malware Detection
 Malware Removal
 Payload Delivery
@@ -261,12 +277,16 @@ APT
 Offensive Security
 Reconnaissance
 Attack Surface
+attack surface management
 Exploit Development
 Red Team Toolkit
 Security Posture Assessment
 Threat Actor
 Threat Intelligence
 Black Hat Hacker
+white hat hacker
+gray hat hacker
+grey hat hacker
 Live Fire Exercise
 Red Team Operations
 Security Breach Simulation
@@ -275,6 +295,8 @@ Network Compromise
 Credential Theft
 Cyber Attack Simulation
 Security Weakness Assessment
+AD
+active directory
 Active Directory Attacks
 Wireless Network Exploitation
 Firewall Bypass
@@ -287,6 +309,7 @@ Covert Channels
 Data Exfiltration
 Privilege Escalation
 Lateral Movement
+crack password
 Password Cracking
 Threat Modeling
 Exploitation Frameworks
@@ -294,6 +317,7 @@ Blue Team
 Cybersecurity Defense
 Incident Response
 Security Operations Center
+security operation center
 Security Monitoring Center
 SOC
 SIEM
@@ -393,6 +417,11 @@ Authentication Bypass
 Session Hijacking
 Data Validation Issues
 API Security Concerns
+api testing
+api penetration testing
+api pentest
+api vulnerability
+api vulnerabilities
 DOM-based Vulnerabilities
 dom based vulnerability
 dom based vulnerabilities
@@ -424,3 +453,38 @@ common vulnerability exposures
 common vulnerabilities exposure
 common vulnerabilities exposures
 common vulnerabilities and exposures
+osint
+open source intelligence
+open-source intelligence
+osint tools
+osint tool
+open source intelligence tools
+open source intelligence tool
+osint framework
+open source intelligence framework
+open source intelligence frameworks
+break pass
+break password
+cipher suites
+CA certificate
+CA certificates
+certificate authority
+OWASP
+open web application security project
+owasp top 10
+dark web
+deep web
+surface web
+ldap
+ldap injection
+Lightweight directory access protocol
+smb
+smb protocol
+server message block
+server message block protocol
+ssh
+ssh protocol
+secure shell
+secure shell protocol
+rdp
+remote desktop protocol
