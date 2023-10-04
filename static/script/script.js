@@ -81,6 +81,11 @@ function sendUserMessage(userMessage) {
             addBotMessage(result.message); // Jika tidak ada karakter baris baru
         }
         isBotResponding = true;
+        // Hapus elemen "loading" setelah data bot dimuat
+        const loadingElements = chatLog.getElementsByClassName("loading-dots");
+        while (loadingElements.length > 0) {
+            chatLog.removeChild(loadingElements[0]);
+        }
         enableUserInput();
     })
     .catch(error => {
@@ -88,17 +93,24 @@ function sendUserMessage(userMessage) {
     });
 }
 
+function loading() {
+    const loading = document.createElement("div");
+    loading.className = "loader";
+    chatLog.appendChild(loading);
+}
+
 sendButton.addEventListener("click", function(){
     if (!isBotResponding) {
         return;
-    }
-
-    const userMessage = userInput.value.trim();
-    if (userMessage) {
-        addUserMessage(userMessage);
-        sendUserMessage(userMessage);
-        userInput.value = "";
-    }    
+    } else {
+        const userMessage = userInput.value.trim();
+        if (userMessage) { 
+            addUserMessage(userMessage);
+            sendUserMessage(userMessage);
+            userInput.value = "";
+            loading();
+        }  
+    }  
 });
 
 // Dapat juga menangani input dari keyboard
