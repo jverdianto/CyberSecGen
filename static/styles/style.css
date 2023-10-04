@@ -129,6 +129,8 @@ body {
 }
 
 .loader {
+    margin-left: 10px;
+    margin-right: auto;
     width: 50px; /* control the size */
     aspect-ratio: 8/5;
     --_g: no-repeat radial-gradient(#000 68%,#0000 71%);

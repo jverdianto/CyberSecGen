@@ -82,7 +82,7 @@ function sendUserMessage(userMessage) {
         }
         isBotResponding = true;
         // Hapus elemen "loading" setelah data bot dimuat
-        const loadingElements = chatLog.getElementsByClassName("loading-dots");
+        const loadingElements = chatLog.getElementsByClassName("loader");
         while (loadingElements.length > 0) {
             chatLog.removeChild(loadingElements[0]);
         }
