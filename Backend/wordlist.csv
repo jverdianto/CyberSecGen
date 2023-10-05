@@ -90,6 +90,29 @@ Security patch
 Cybersecurity education
 Security incident management
 Web application security
+web application security testing
+web application pentest
+web app security
+web app security testing
+web app pentest
+web pentest
+mobile application security
+mobile app security
+mobile app security testing
+mobile apps security
+mobile apps security testing
+mobile app pentest
+mobile apps pentest
+proxy
+proxy server
+client side proxy
+client side proxy server
+reverse proxy
+reverse proxy server
+hardening
+device hardening
+application security
+app security
 web application firewall
 web app firewall
 waf
@@ -119,7 +142,6 @@ Cybersecurity career
 Security awareness policy
 Firewall
 VPN
-Phishing
 HTTPS
 IoT
 Ransomware
@@ -166,7 +188,6 @@ Botnet
 Exploit
 exploits
 exploit tools
-Phishing
 Spam
 Backdoor
 Logic Bomb
@@ -343,7 +364,6 @@ Cybersecurity Best Practices
 Security Awareness Training
 Anomaly Detection
 Security Baselines
-Network Security
 Security Controls
 Vulnerability Management
 Cyber Defense
@@ -488,3 +508,37 @@ secure shell
 secure shell protocol
 rdp
 remote desktop protocol
+universal cross site scripting
+universal xss
+uxss
+cache poisoning
+web cache
+web cache poisoning
+dns
+dns lookup
+reverse dns lookup
+dns cache
+dns cache poisoning
+dns server
+domain name system
+browser cache
+browser cache poisoning
+arp poisoning
+arp spoofing
+ip spoofing
+spoofing
+spoof
+ip rotate
+ip rotating
+intercept traffic
+capture traffic
+spf
+sender policy framework
+dkim
+dkim selector
+domain keys identified mail
+mail policy
+email phishing
+vishing
+voice phishing
+cyber crime

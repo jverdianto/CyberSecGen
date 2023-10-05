@@ -17,7 +17,7 @@ def getMessage():
             }
         else:
             data = {
-            'message': "Your question is not related to Cyber Security",
+            'message': "I'm sorry, I cannot assist you with that.",
             'keyword': chatKeyword,
             }
         return jsonify(data)
