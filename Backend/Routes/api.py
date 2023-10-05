@@ -21,11 +21,13 @@ def getMessage():
                 data = {
                 'message': chatResponse,
                 'keyword': chatKeyword,
+                'verify': chatVerify
                 }
             else:
                 data = {
                 'message': "I'm sorry, I cannot assist you with that.",
                 'keyword': chatKeyword,
+                'verify': chatVerify
                 }
         return jsonify(data)
     else:
