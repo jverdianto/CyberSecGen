@@ -1,5 +1,5 @@
 from flask import request, jsonify, Blueprint
-from Backend.Routes.checkMessage import generateMessageKeyword, checkKeyword
+from Backend.Routes.checkMessage import generateMessageKeyword, checkKeyword, verifyMessage
 import g4f
 
 first_blueprint = Blueprint('first_blueprint', __name__, url_prefix="/api")
@@ -16,10 +16,17 @@ def getMessage():
             'keyword': chatKeyword,
             }
         else:
-            data = {
-            'message': "I'm sorry, I cannot assist you with that.",
-            'keyword': chatKeyword,
-            }
+            chatVerify = verifyMessage(chatRequest)
+            if (chatVerify == 'yes'):
+                data = {
+                'message': chatResponse,
+                'keyword': chatKeyword,
+                }
+            else:
+                data = {
+                'message': "I'm sorry, I cannot assist you with that.",
+                'keyword': chatKeyword,
+                }
         return jsonify(data)
     else:
         return jsonify({'message': 'No JSON data found in the request'})

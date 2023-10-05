@@ -20,3 +20,16 @@ def checkKeyword(keywordResponse):
         if keyword.lower() in (data.lower() for data in WORDLISTS):
             return True
     return False
+
+def verifyMessage(message):
+    prompt = 'Is this sentence related to cyber security? Respond with yes or no: ' + message
+    verifyResponse = g4f.ChatCompletion.create(
+        model=g4f.models.gpt_35_turbo_16k,
+        messages=[{"role": "user", "content": prompt}]
+        )
+    while verifyResponse == "":
+        verifyResponse = g4f.ChatCompletion.create(
+        model=g4f.models.gpt_35_turbo_16k,
+        messages=[{"role": "user", "content": prompt}],
+    )
+    return verifyResponse
