@@ -17,7 +17,7 @@ def getMessage():
             }
         else:
             chatVerify = verifyMessage(chatRequest)
-            if (chatVerify == 'yes'):
+            if (chatVerify.lower() == 'yes'):
                 data = {
                 'message': chatResponse,
                 'keyword': chatKeyword,
