@@ -16,7 +16,6 @@ function addBotMessage(message) {
     const botMessage = document.createElement("div");
     botMessage.className = "bot-message";
     chatLog.appendChild(botMessage);
-
     // Animasi efek ketikan
     let charIndex = 0;
     const typingInterval = setInterval(() => {
@@ -30,6 +29,13 @@ function addBotMessage(message) {
             adjustMessageWidth(botMessage);
         }
     }, 10); // Interval waktu antara penambahan karakter
+}
+
+function addStreamMessage(){
+    const botMessage = document.createElement("div");
+    botMessage.className = "bot-message";
+    chatLog.appendChild(botMessage);
+    return botMessage
 }
 
 function adjustMessageWidth(messageElement) {
@@ -65,32 +71,7 @@ function sendUserMessage(userMessage) {
         body: raw,
         redirect: 'follow'
     };
-
-    fetch("http://192.168.65.12:5000/api/data", requestOptions)
-    .then(response => response.json())
-    .then(result => {
-        console.log(result.message);
-        console.log(result.keyword);
-        // Memeriksa jika ada karakter baris baru (\n) dalam result.message
-        if (result.message.includes('\n\n')) {
-            const messageLines = result.message.split('\n\n');
-            messageLines.forEach(line => {
-                addBotMessage(line); // Menambahkan setiap baris sebagai pesan baru
-            });
-        } else {
-            addBotMessage(result.message); // Jika tidak ada karakter baris baru
-        }
-        isBotResponding = true;
-        // Hapus elemen "loading" setelah data bot dimuat
-        const loadingElements = chatLog.getElementsByClassName("loader");
-        while (loadingElements.length > 0) {
-            chatLog.removeChild(loadingElements[0]);
-        }
-        enableUserInput();
-    })
-    .catch(error => {
-        console.log('error', error);
-    });
+    streamData(requestOptions)
 }
 
 function loading() {
@@ -122,5 +103,87 @@ userInput.addEventListener("keyup", function(event) {
     }
 });
 
+function streamData (requestOptions){
+    fetch("http://localhost:5000/api/streamdata", requestOptions)
+		.then(response => {
+			botMessage = addStreamMessage()
+			const stream = response.body;
+			const textDecoder = new TextDecoder('utf-8');
+            
+			let flag = 0
+			// Process the text stream
+			const reader = stream.getReader();
+
+			function readNextChunk() {
+				reader.read().then(({
+					done,
+					value
+				}) => {
+
+					if (done) {
+						// The stream has ended
+						console.log('Stream ended');
+						return;
+					}
+					const chunkString = textDecoder.decode(value);
+                    console.log(chunkString)
+					botMessage.append(chunkString)
+					// Memeriksa jika ada karakter baris baru (\n) dalam result.message
+					if (chunkString.includes('\n')) {
+						message = chunkString.split('\n')
+						if (message[1] != '') {
+							botMessage.textContent = botMessage.textContent.replace(message[1], '')
+							botMessage = addStreamMessage()
+							botMessage.append(message[1])
+						} else {
+							botMessage = addStreamMessage()
+						}; // Menambahkan setiap baris sebagai pesan baru
+					}
+					// Continue reading the next chunk
+					readNextChunk();
+				});
+			}
+
+			// Start reading the stream
+			readNextChunk();
+			isBotResponding = true;
+            const loadingElements = chatLog.getElementsByClassName("loader");
+            while (loadingElements.length > 0) {
+            chatLog.removeChild(loadingElements[0]);
+            }
+			enableUserInput();
+		})
+		.catch(error => {
+			console.log('error', error);
+		});
+}
+
+function notStreamData(requestOptions){
+    fetch("http://localhost:5000/api/data", requestOptions)
+    .then(response => response.json())
+    .then(result => {
+        console.log(result.message);
+        console.log(result.keyword);
+        // Memeriksa jika ada karakter baris baru (\n) dalam result.message
+        if (result.message.includes('\n\n')) {
+            const messageLines = result.message.split('\n\n');
+            messageLines.forEach(line => {
+                addBotMessage(line); // Menambahkan setiap baris sebagai pesan baru
+            });
+        } else {
+            addBotMessage(result.message); // Jika tidak ada karakter baris baru
+        }
+        isBotResponding = true;
+        // Hapus elemen "loading" setelah data bot dimuat
+        const loadingElements = chatLog.getElementsByClassName("loader");
+        while (loadingElements.length > 0) {
+            chatLog.removeChild(loadingElements[0]);
+        }
+        enableUserInput();
+    })
+    .catch(error => {
+        console.log('error', error);
+    });
+}
 // Aktifkan input pengguna pada awalnya
 enableUserInput();
