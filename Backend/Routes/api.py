@@ -71,10 +71,4 @@ def generateMessage(chatRequest, stream = False):
         messages=[{"role": "user", "content": chatRequest}],
         stream= stream
     )
-    while chatResponse == "":
-        chatResponse = g4f.ChatCompletion.create(
-        model=g4f.models.gpt_35_turbo,
-        messages=[{"role": "user", "content": chatRequest}],
-        stream = stream
-    )
     return chatResponse

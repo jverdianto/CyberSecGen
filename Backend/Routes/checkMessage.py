@@ -6,11 +6,6 @@ def generateMessageKeyword(message):
         model=g4f.models.gpt_35_turbo,
         messages=[{"role": "user", "content": prompt}]
         )
-    while keywordResponse == "":
-        keywordResponse = g4f.ChatCompletion.create(
-        model=g4f.models.gpt_35_turbo,
-        messages=[{"role": "user", "content": prompt}],
-    )
     return keywordResponse
 
 def checkKeyword(keywordResponse):
@@ -27,9 +22,4 @@ def verifyMessage(message):
         model=g4f.models.gpt_35_turbo,
         messages=[{"role": "user", "content": prompt}]
         )
-    while verifyResponse == "":
-        verifyResponse = g4f.ChatCompletion.create(
-        model=g4f.models.gpt_35_turbo,
-        messages=[{"role": "user", "content": prompt}],
-    )
     return verifyResponse
