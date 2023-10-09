@@ -126,11 +126,10 @@ function streamData (requestOptions){
 						return;
 					}
 					const chunkString = textDecoder.decode(value);
-                    console.log(chunkString)
 					botMessage.append(chunkString)
 					// Memeriksa jika ada karakter baris baru (\n) dalam result.message
-					if (chunkString.includes('\n')) {
-						message = chunkString.split('\n')
+					if (chunkString.includes('\n\n')) {
+						message = chunkString.split('\n\n')
 						if (message[1] != '') {
 							botMessage.textContent = botMessage.textContent.replace(message[1], '')
 							botMessage = addStreamMessage()
