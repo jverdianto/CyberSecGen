@@ -100,7 +100,7 @@ body {
 }
 
 .hljs {
-    max-width: 70%;
+    max-width: 100%;
 }
 
 /* Chat Input */
@@ -155,3 +155,4 @@ body {
     83.33%{-webkit-mask-position: 0% 0%  ,50% 0%  ,100% 100%}
     100%  {-webkit-mask-position: 0% 0%  ,50% 0%  ,100% 0%  }
 }
+

@@ -1,5 +1,4 @@
 from flask import request, jsonify, Blueprint, Flask
-from Backend.Routes.checkMessage import generateMessageKeyword, checkKeyword, verifyMessage
 import g4f
 
 app = Flask(__name__)

@@ -1,17 +1,6 @@
 const chatLog = document.getElementById("chat-log");
-const markdown = window.markdownit({
-    highlight: function (str, lang) {
-        if (lang && hljs.getLanguage(lang)) {
-            try {
-                return '<pre class="hljs"><code>' +
-                       hljs.highlightAll({language: lang, code: str}).value +
-                       '</code></pre>';
-            } catch (__) {}
-        }
-        return '<pre class="hljs"><code>' + markdown.utils.escapeHtml(str) + '</code></pre>';
-    }
-});
-hljs.highlightAll();
+const colorThemes = document.querySelectorAll('[name="theme"]');
+const markdown = window.markdownit();
 const userInput = document.getElementById("user-input");
 const sendButton = document.getElementById("send-button");
 var chatRequest = 
@@ -26,7 +15,6 @@ var chatRequest =
 
 let isBotResponding = true; 
 var botMessageCount = 0;
-var botMessageCountBefore = 0;
 var codeFlag = false
 
 function addUserMessage(message) {
@@ -61,7 +49,6 @@ function addStreamMessage(){
     const botMessage = document.createElement("div");
     botMessage.className = "bot-message";
     chatLog.appendChild(botMessage);
-    botMessageCount++;
     return botMessage
 }
 
@@ -139,8 +126,7 @@ function streamData (requestOptions){
 			botMessage = addStreamMessage()
 			const stream = response.body;
 			const textDecoder = new TextDecoder('utf-8');
-            
-			let flag = 0
+        
 			// Process the text stream
 			const reader = stream.getReader();
             var text = ""
@@ -152,42 +138,20 @@ function streamData (requestOptions){
                     
 					if (done) {
 						var y = document.getElementsByClassName('bot-message');
-                        var content = ""
-                        for (i=botMessageCountBefore; i<botMessageCount; i++){
-                            content = content + y[i].innerHTML
-                        }
+                        y[botMessageCount].innerHTML = y[botMessageCount].innerHTML.trim()
+                        var content = y[botMessageCount].innerHTML
                         var chatResponse = {
                             "role": "assistant",
                             "content": content
                         }
                         chatRequest.message.push(chatResponse)
-                        botMessageCountBefore = botMessageCount
+                        botMessageCount++;
 						return;
 					}
-                    
 					const chunkString = textDecoder.decode(value);
                     text += chunkString;
                     botMessage.innerHTML = markdown.render(text)
-                    // if (chunkString.includes("```") || chunkString.includes("``")) {
-                    //     codeFlag = !codeFlag
-                    //     if (codeFlag == true){
-                    //         code = document.createElement("div");
-                    //         code.className = "bot-message2"
-                    //         chatLog.appendChild(code);
-                    //     }
-                    // }
-                    // if (codeFlag == true){
-                    //     const code = document.getElementsByClassName("bot-message2");
-                    //     code[0].append(chunkString)
-                        
-                    // }
-                    // else{
-					//     botMessage.append(chunkString)
-                    // }
-                   
-					// Memeriksa jika ada karakter baris baru (\n) dalam result.message
-					
-					// Continue reading the next chunk
+                    document.querySelectorAll(`code`).forEach((el) => {hljs.highlightElement(el);})
 					readNextChunk();
 				});
 			}
@@ -204,34 +168,6 @@ function streamData (requestOptions){
 		.catch(error => {
 			console.log('error', error);
 		});
-}
-
-function notStreamData(requestOptions){
-    fetch("http://localhost:5000/api/data", requestOptions)
-    .then(response => response.json())
-    .then(result => {
-        console.log(result.message);
-        console.log(result.keyword);
-        // Memeriksa jika ada karakter baris baru (\n) dalam result.message
-        if (result.message.includes('\n\n')) {
-            const messageLines = result.message.split('\n\n');
-            messageLines.forEach(line => {
-                addBotMessage(line); // Menambahkan setiap baris sebagai pesan baru
-            });
-        } else {
-            addBotMessage(result.message); // Jika tidak ada karakter baris baru
-        }
-        isBotResponding = true;
-        // Hapus elemen "loading" setelah data bot dimuat
-        const loadingElements = chatLog.getElementsByClassName("loader");
-        while (loadingElements.length > 0) {
-            chatLog.removeChild(loadingElements[0]);
-        }
-        enableUserInput();
-    })
-    .catch(error => {
-        console.log('error', error);
-    });
 }
 // Aktifkan input pengguna pada awalnya
 enableUserInput();
