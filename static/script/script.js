@@ -121,7 +121,7 @@ userInput.addEventListener("keyup", function(event) {
 });
 
 function streamData (requestOptions){
-    fetch("http://localhost:5000/api/streamdata", requestOptions)
+    fetch("http://127.0.0.1:5000/api/streamdata", requestOptions)
 		.then(response => {
 			botMessage = addStreamMessage()
 			const stream = response.body;

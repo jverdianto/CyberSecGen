@@ -99,6 +99,14 @@ body {
     white-space:pre-wrap;
 }
 
+ol, ul {
+    padding-left: 15px;
+}
+
+li {
+    padding-bottom: 0;
+}
+
 .hljs {
     max-width: 100%;
 }
