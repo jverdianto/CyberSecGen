@@ -5,12 +5,7 @@ const userInput = document.getElementById("user-input");
 const sendButton = document.getElementById("send-button");
 var chatRequest = 
     {
-        "message": [
-            {
-              "role": "system",
-              "content": "You are a cyber security assistant. As a cyber security assistant, you can only answer things that are related to cyber security, you cannot answer things that are not related to cyber security even if you know that."
-            },
-          ]
+        "message": []
     }
 
 let isBotResponding = true; 
@@ -26,26 +21,7 @@ function addUserMessage(message) {
     disableUserInput(); // Nonaktifkan input pengguna setelah mengirim pesan
 }
 
-function addBotMessage(message) {
-    const botMessage = document.createElement("div");
-    botMessage.className = "bot-message";
-    chatLog.appendChild(botMessage);
-    // Animasi efek ketikan
-    let charIndex = 0;
-    const typingInterval = setInterval(() => {
-        if (charIndex < message.length) {
-            const typingText = document.createElement("span");
-            typingText.textContent = message.charAt(charIndex);
-            botMessage.appendChild(typingText);
-            charIndex++;
-        } else {
-            clearInterval(typingInterval); // Hentikan animasi ketika semua karakter ditampilkan
-            adjustMessageWidth(botMessage);
-        }
-    }, 10); // Interval waktu antara penambahan karakter
-}
-
-function addStreamMessage(){
+function addBotMessage(){
     const botMessage = document.createElement("div");
     botMessage.className = "bot-message";
     chatLog.appendChild(botMessage);
@@ -123,7 +99,7 @@ userInput.addEventListener("keyup", function(event) {
 function streamData (requestOptions){
     fetch("http://127.0.0.1:5000/api/streamdata", requestOptions)
 		.then(response => {
-			botMessage = addStreamMessage()
+			botMessage = addBotMessage()
 			const stream = response.body;
 			const textDecoder = new TextDecoder('utf-8');
         
@@ -139,7 +115,7 @@ function streamData (requestOptions){
 					if (done) {
 						var y = document.getElementsByClassName('bot-message');
                         y[botMessageCount].innerHTML = y[botMessageCount].innerHTML.trim()
-                        var content = y[botMessageCount].innerHTML
+                        var content = y[botMessageCount].innerText
                         var chatResponse = {
                             "role": "assistant",
                             "content": content

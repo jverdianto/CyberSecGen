@@ -8,7 +8,7 @@ app = Flask(__name__)
 app.register_blueprint(first_blueprint)
 path = os.getcwd()
 
-CORS(app, resources={r"/*": {"origins": "http://localhost"}})
+CORS(app, resources={r"/*": {"origins": "*"}})
 
 # Define a route and a function to handle requests
 @app.route('/')
