@@ -1,4 +1,17 @@
 const chatLog = document.getElementById("chat-log");
+const markdown = window.markdownit({
+    highlight: function (str, lang) {
+        if (lang && hljs.getLanguage(lang)) {
+            try {
+                return '<pre class="hljs"><code>' +
+                       hljs.highlightAll({language: lang, code: str}).value +
+                       '</code></pre>';
+            } catch (__) {}
+        }
+        return '<pre class="hljs"><code>' + markdown.utils.escapeHtml(str) + '</code></pre>';
+    }
+});
+hljs.highlightAll();
 const userInput = document.getElementById("user-input");
 const sendButton = document.getElementById("send-button");
 var chatRequest = 
@@ -14,6 +27,7 @@ var chatRequest =
 let isBotResponding = true; 
 var botMessageCount = 0;
 var botMessageCountBefore = 0;
+var codeFlag = false
 
 function addUserMessage(message) {
     const userMessage = document.createElement("div");
@@ -70,7 +84,6 @@ function enableUserInput() {
 }
 
 function sendUserMessage(userMessage) {
-    console.log(chatRequest)
     var userRequest = {
         "role": "user",
         "content": userMessage
@@ -130,7 +143,7 @@ function streamData (requestOptions){
 			let flag = 0
 			// Process the text stream
 			const reader = stream.getReader();
-
+            var text = ""
 			function readNextChunk() {
 				reader.read().then(({
 					done,
@@ -139,35 +152,41 @@ function streamData (requestOptions){
                     
 					if (done) {
 						var y = document.getElementsByClassName('bot-message');
-                        console.log(y)
                         var content = ""
                         for (i=botMessageCountBefore; i<botMessageCount; i++){
-                            console.log(y[i])
                             content = content + y[i].innerHTML
                         }
                         var chatResponse = {
                             "role": "assistant",
                             "content": content
                         }
-                        console.log(chatResponse)
                         chatRequest.message.push(chatResponse)
                         botMessageCountBefore = botMessageCount
-						console.log('Stream ended');
 						return;
 					}
+                    
 					const chunkString = textDecoder.decode(value);
-					botMessage.append(chunkString)
+                    text += chunkString;
+                    botMessage.innerHTML = markdown.render(text)
+                    // if (chunkString.includes("```") || chunkString.includes("``")) {
+                    //     codeFlag = !codeFlag
+                    //     if (codeFlag == true){
+                    //         code = document.createElement("div");
+                    //         code.className = "bot-message2"
+                    //         chatLog.appendChild(code);
+                    //     }
+                    // }
+                    // if (codeFlag == true){
+                    //     const code = document.getElementsByClassName("bot-message2");
+                    //     code[0].append(chunkString)
+                        
+                    // }
+                    // else{
+					//     botMessage.append(chunkString)
+                    // }
+                   
 					// Memeriksa jika ada karakter baris baru (\n) dalam result.message
-					if (chunkString.includes('\n\n')) {
-						message = chunkString.split('\n\n')
-						if (message[1] != '') {
-							botMessage.textContent = botMessage.textContent.replace(message[1], '')
-							botMessage = addStreamMessage()
-							botMessage.append(message[1])
-						} else {
-							botMessage = addStreamMessage()
-						}; // Menambahkan setiap baris sebagai pesan baru
-					}
+					
 					// Continue reading the next chunk
 					readNextChunk();
 				});
