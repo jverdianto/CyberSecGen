@@ -12,7 +12,7 @@ def getStreamMessage():
         chatResponse = generateMessage(chatRequest, True)
         def streaming():
             for word in chatResponse:
-                yield word
+                yield f'{word}'
         return app.response_class(streaming(), mimetype='text/event-stream')
     else:
         return jsonify({'message': 'No JSON data found in the request'})

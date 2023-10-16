@@ -1,7 +1,19 @@
 const chatLog = document.getElementById("chat-log");
 const userInput = document.getElementById("user-input");
 const sendButton = document.getElementById("send-button");
+var chatRequest = 
+    {
+        "message": [
+            {
+              "role": "system",
+              "content": "You are a cyber security assistant. As a cyber security assistant, you can only answer things that are related to cyber security, you cannot answer things that are not related to cyber security even if you know that."
+            },
+          ]
+    }
+
 let isBotResponding = true; 
+var botMessageCount = 0;
+var botMessageCountBefore = 0;
 
 function addUserMessage(message) {
     const userMessage = document.createElement("div");
@@ -35,6 +47,7 @@ function addStreamMessage(){
     const botMessage = document.createElement("div");
     botMessage.className = "bot-message";
     chatLog.appendChild(botMessage);
+    botMessageCount++;
     return botMessage
 }
 
@@ -57,10 +70,14 @@ function enableUserInput() {
 }
 
 function sendUserMessage(userMessage) {
+    console.log(chatRequest)
+    var userRequest = {
+        "role": "user",
+        "content": userMessage
+    }
+    chatRequest.message.push(userRequest)
     // Kirim pesan pengguna ke API
-    var raw = JSON.stringify({
-        "message": userMessage
-    });
+    var raw = JSON.stringify(chatRequest);
 
     var requestOptions = {
         method: 'POST',
@@ -119,9 +136,22 @@ function streamData (requestOptions){
 					done,
 					value
 				}) => {
-
+                    
 					if (done) {
-						// The stream has ended
+						var y = document.getElementsByClassName('bot-message');
+                        console.log(y)
+                        var content = ""
+                        for (i=botMessageCountBefore; i<botMessageCount; i++){
+                            console.log(y[i])
+                            content = content + y[i].innerHTML
+                        }
+                        var chatResponse = {
+                            "role": "assistant",
+                            "content": content
+                        }
+                        console.log(chatResponse)
+                        chatRequest.message.push(chatResponse)
+                        botMessageCountBefore = botMessageCount
 						console.log('Stream ended');
 						return;
 					}
