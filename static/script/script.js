@@ -1,6 +1,6 @@
 const chatLog = document.getElementById("chat-log");
 const colorThemes = document.querySelectorAll('[name="theme"]');
-const markdown = window.markdownit();
+const markdown = window.markdownit().use(window.markdownItAttrs);
 const userInput = document.getElementById("user-input");
 const sendButton = document.getElementById("send-button");
 var chatRequest = 
@@ -11,6 +11,11 @@ var chatRequest =
 let isBotResponding = true; 
 var botMessageCount = 0;
 var codeFlag = false
+
+markdown.renderer.rules.list_item_open = function (tokens, idx) {
+    const classAttribute = 'class="no-list-break"';
+    return `<li ${classAttribute}>`;
+  };
 
 function addUserMessage(message) {
     const userMessage = document.createElement("div");
