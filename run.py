@@ -2,6 +2,9 @@ from flask import Flask, render_template
 from flask_cors import CORS
 from Backend.Routes.api import first_blueprint
 import os
+from dotenv import load_dotenv
+load_dotenv()
+
 
 # Create a Flask web application instance
 app = Flask(__name__)
